@@ -1,0 +1,388 @@
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f4f8, #cddbe7);
+    margin: 0;
+    color: #333;
+    overflow: auto; /* Allow scrolling for smaller screens */
+    padding: 20px; /* Add some padding around the container */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    /* Playful background animation */
+    background: linear-gradient(45deg, #a8dadc, #457b9d, #1d3557, #e63946, #f1faee);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+}
+
+@keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    animation: fadeInScale 0.8s ease-out forwards; /* Changed animation */
+    border: 1px solid #e0e0e0;
+    position: relative; /* For potential absolute positioned elements */
+    overflow: hidden; /* Ensure particles stay within container */
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    animation: bounceInTitle 1s ease-out forwards; /* New animation for title */
+    animation-delay: 0.5s; /* Delay title animation */
+    opacity: 0; /* Start hidden for animation */
+}
+
+@keyframes bounceInTitle {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    80% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+p {
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+#player-id-display, #room-id-display {
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+#status-message {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745; /* Green for success/ready */
+    margin-bottom: 20px;
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.02); }
+}
+
+#player-count, #spectator-count, #round-counter, #timer-display {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 8px;
+}
+
+#timer-display {
+    font-weight: bold;
+    color: #e67e22; /* Orange for timer */
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.player-score {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #34495e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-score .ready-status {
+    font-size: 1.2em;
+}
+
+
+/* Choice Buttons */
+.choices {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    gap: 15px; /* Space between buttons */
+}
+
+.choices button {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    min-width: 120px; /* Ensure buttons have a minimum width */
+}
+
+.choices button:hover:not(:disabled) {
+    background: linear-gradient(45deg, #0056b3, #003f7f);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+.choices button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+}
+
+.choices button.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.7;
+}
+
+/* Ready Button */
+#ready-button {
+    background-color: #6c757d; /* Grey for ready button */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+}
+
+#ready-button:hover:not(:disabled) {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+#ready-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* Round Info */
+#round-info {
+    margin-top: 35px;
+    border-top: 2px solid #eee;
+    padding-top: 25px;
+    opacity: 0; /* Start hidden for animation */
+}
+
+#round-info h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+#round-info p {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+#round-winner {
+    font-weight: bold;
+    color: #dc3545; /* Red for winner */
+    font-size: 1.4em;
+    text-transform: uppercase;
+    animation: bounceIn 0.8s ease-out;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Room Entry */
+#room-entry {
+    margin-bottom: 20px;
+}
+
+#room-entry input {
+    padding: 10px 15px;
+    margin: 8px auto; /* Center inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: calc(100% - 20px); /* Adjust for padding and margin */
+    max-width: 250px;
+    box-sizing: border-box;
+    display: block; /* Make inputs block-level for centering */
+    animation: slideInInput 0.6s ease-out forwards; /* Animation for inputs */
+    opacity: 0;
+}
+
+#room-entry input:nth-of-type(1) { animation-delay: 1s; }
+#room-entry input:nth-of-type(2) { animation-delay: 1.2s; }
+
+@keyframes slideInInput {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+
+.room-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+    margin-top: 15px;
+}
+
+.room-actions button {
+    background-color: #28a745; /* Green for join button */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+    flex-grow: 1; /* Allow buttons to grow */
+    max-width: 200px; /* Max width for buttons */
+    animation: popInButton 0.6s ease-out forwards; /* Animation for buttons */
+    opacity: 0;
+}
+
+.room-actions button:nth-of-type(1) { animation-delay: 1.4s; }
+.room-actions button:nth-of-type(2) { animation-delay: 1.6s; }
+.room-actions button:nth-of-type(3) { animation-delay: 1.8s; } /* Delay for new spectator button */
+
+
+@keyframes popInButton {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.room-actions button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.room-actions .spectator-button {
+    background-color: #6c757d; /* Different color for spectator button */
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+}
+
+.room-actions .spectator-button:hover {
+    background-color: #5a6268;
+}
+
+
+/* Chat styles */
+.chat-container {
+    margin-top: 30px;
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+    text-align: left;
+}
+
+#chat-messages {
+    height: 150px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fdfdfd;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.chat-message {
+    margin-bottom: 5px;
+    word-wrap: break-word; /* Ensure long words wrap */
+}
+
+.chat-message strong {
+    color: #007bff;
+}
+
+#chat-input {
+    width: calc(100% - 80px); /* Adjust for button width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+#send-chat-button {
+    background-color: #17a2b8; /* Info blue for send button */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+#send-chat-button:hover {
+    background-color: #138496;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .choices button {
+        width: 100%; /* Full width buttons on small screens */
+        margin: 5px 0;
+    }
+
+    #room-entry input {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .room-actions button {
+        width: 100%;
+        max-width: none; /* Remove max-width on small screens */
+    }
+
+    #chat-input {
+        width: calc(100% - 70px);
+    }
+}

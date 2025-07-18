@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer RPS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+
+        <div id="room-entry">
+            <input type="text" id="player-name-input" placeholder="Enter your name" maxlength="15">
+            <input type="text" id="room-id-input" placeholder="Enter room ID" maxlength="10">
+            <div class="room-actions">
+                <button id="create-room-button">Create New Room</button>
+                <button id="join-room-button">Join Existing Room</button>
+                <button id="join-spectator-button" class="spectator-button">Join as Spectator</button>
+            </div>
+        </div>
+
+        <div id="game-area" class="hidden">
+            <p id="player-id-display">Your Player ID: N/A</p>
+            <p id="room-id-display">Room ID: N/A</p>
+            <p id="status-message">Connecting to server...</p>
+            <p id="player-count">Players: 0/2</p>
+            <p id="spectator-count">Spectators: 0</p>
+            <p id="round-counter">Round: 0</p>
+            <p id="timer-display">Time Left: --s</p>
+
+            <div class="score-board">
+                <div class="player-score">
+                    <span id="player1-name">Player 1</span>: <span id="player1-score">W:0 L:0 T:0</span> <span id="player1-ready" class="ready-status"></span>
+                </div>
+                <div class="player-score">
+                    <span id="player2-name">Player 2</span>: <span id="player2-score">W:0 L:0 T:0</span> <span id="player2-ready" class="ready-status"></span>
+                </div>
+            </div>
+
+            <div class="choices" id="choice-buttons">
+                <button id="rock" data-choice="rock">✊ Rock</button>
+                <button id="paper" data-choice="paper">✋ Paper</button>
+                <button id="scissors" data-choice="scissors">✌️ Scissors</button>
+            </div>
+
+            <button id="ready-button" class="hidden">Ready</button>
+
+            <div id="round-info" class="hidden">
+                <h2>Round Results:</h2>
+                <p>Player 1: <span id="player1-choice"></span></p>
+                <p>Player 2: <span id="player2-choice"></span></p>
+                <p id="round-winner"></p>
+            </div>
+
+            <div class="chat-container">
+                <div id="chat-messages"></div>
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="send-chat-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
