@@ -23,7 +23,7 @@ const readyButton = document.getElementById('ready-button');
 const player1NameDisplay = document.getElementById('player1-name');
 const player2NameDisplay = document.getElementById('player2-name');
 const player1ScoreDisplay = document.getElementById('player1-score');
-const player2ScoreDisplay = document = document.getElementById('player2-score');
+const player2ScoreDisplay = document.getElementById('player2-score');
 const player1ReadyStatus = document.getElementById('player1-ready');
 const player2ReadyStatus = document.getElementById('player2-ready');
 
@@ -112,7 +112,10 @@ function generateRoomId() {
 
 // --- WebSocket Connection ---
 function connectWebSocket() {
-    ws = new WebSocket('ws://localhost:3000'); // Connect to your Node.js server
+    // Determine WebSocket URL dynamically
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const host = window.location.host;
+    ws = new WebSocket(`${protocol}//${host}`); // Connect to your Node.js server dynamically
 
     ws.onopen = () => {
         statusMessage.textContent = 'Connected to game server! Joining room...';
